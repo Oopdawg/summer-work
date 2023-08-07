@@ -11,7 +11,7 @@ public class UnoApp {
 
     public void runNewGame(){
         playerSetup();
-        while (winningPlayer.score < 500){
+        while (/*winningPlayer.score < 500*/ true){
             runNewRound();
         }
     }
