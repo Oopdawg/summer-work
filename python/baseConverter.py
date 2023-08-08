@@ -1,37 +1,26 @@
 num = (input("Enter a number: ")).upper()
-startBase = int(input("Enter starting base: "))
-endBase = int(input("Enter ending base: "))
+start_base = int(input("Enter starting base: "))
+end_base = int(input("Enter ending base: "))
 
-digitToValue = {}
+digit_to_value = {}
 for i in range(0, 10):
-    digitToValue[str(i)] = i
+    digit_to_value[str(i)] = i
 for ascii in range(ord('A'), ord('Z')+1):
-    digitToValue[chr(ascii)] = ascii-ord('A')+10
+    digit_to_value[chr(ascii)] = ascii-ord('A')+10
 
 
-valueToDigit = {v:k for k,v in digitToValue.items()}
-
-digits = [c for c in num]
-digits.reverse()
+# inverse of the other dictionary using dictionary comprehension
+value_to_digit = {v:k for k,v in digit_to_value.items()}
 
 
-numBase10 = 0
-for e, digit in enumerate(digits):
-    numBase10 += digitToValue[digit]*startBase**e
+# converts number to the end base
+end_digits = []
+quotient = int(num, base=start_base) # converts number to base 10
+while quotient or not end_digits: # runs the first time as endDigits is empty
+    quotient, remainder = divmod(quotient, end_base) # divmod allows to operate first on numBase10 and then on the remainders
+    end_digits.append(remainder)
+end_digits.reverse()
 
-endDigits = []
-quotient = numBase10//endBase
-remainder = numBase10%endBase
-endDigits.append(remainder)
 
-while quotient != 0:
-    remainder = quotient%endBase
-    quotient //= endBase
-    endDigits.append(remainder)
-endDigits.reverse()
-
-output = ''
-for i in endDigits:
-    output += valueToDigit[i]
-
+output = ''.join([value_to_digit[i] for i in end_digits]) # similar to list comprehension
 print(output)
