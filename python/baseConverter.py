@@ -23,6 +23,5 @@ while quotient or not end_digits: # runs the first time as endDigits is empty
     end_digits.append(remainder)
 end_digits.reverse()
 
-
 output = ''.join([value_to_digit[i] for i in end_digits]) # similar to list comprehension
 print(output)
