@@ -2,11 +2,13 @@ num = (input("Enter a number: ")).upper()
 start_base = int(input("Enter starting base: "))
 end_base = int(input("Enter ending base: "))
 
-digit_to_value = {}
-for i in range(0, 10):
-    digit_to_value[str(i)] = i
-for ascii in range(ord('A'), ord('Z')+1):
-    digit_to_value[chr(ascii)] = ascii-ord('A')+10
+digit_to_value = {str(i) : i for i in range(0, 10)}
+digit_to_value.update({chr(ascii) : ascii-ord('A')+10 for ascii in range(ord('A'), ord('Z')+1)})
+
+# for i in range(0, 10):
+#     digit_to_value[str(i)] = i
+# for ascii in range(ord('A'), ord('Z')+1):
+#     digit_to_value[chr(ascii)] = ascii-ord('A')+10
 
 
 # inverse of the other dictionary using dictionary comprehension

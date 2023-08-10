@@ -8,7 +8,18 @@ import java.lang.Math;
 
 public class BaseConverter {
 
-    BaseConverter(){
+    // Dictionary to get character digits to int value
+    // eg A = 10
+    static HashMap<String, Integer> digitToValue = new HashMap<>();
+
+    // Dictionary to get int value to digits
+    static HashMap<Integer, String> valueToDigit = new HashMap<>();
+
+    static final int MIN_BASE = 2;
+    static final int MAX_BASE = 36;
+
+    static {
+
         // Initialize digit to value mappings
         // Manages base 2 to 36
 
@@ -24,22 +35,17 @@ public class BaseConverter {
             digitToValue.put(Character.toString(c), value);
             valueToDigit.put(value, Character.toString(c));
         }
+
     }
-
-    // Dictionary to get character digits to int value
-    // eg A = 10
-    HashMap<String, Integer> digitToValue = new HashMap<>();
-
-    // Dictionary to get int value to digits
-    HashMap<Integer, String> valueToDigit = new HashMap<>();
-
+    BaseConverter(){
+    }
 
     ArrayList<String> startNumberDigits = new ArrayList<>();
     ArrayList<Integer> startNumberDigitsValues = new ArrayList<Integer>();
     int startBase = 0;
     int endBase = 0;
 
-    public void askInputs(){
+    void askInputs(){
         // asks for the number
         Scanner scanner = new Scanner(System.in);
         System.out.println("Input a number ranging with a base ranging from 2 to 36");
@@ -67,24 +73,37 @@ public class BaseConverter {
     }
 
 
-    public void validateInputs(){ // bool function OR throw exceptions here OR both
+    void validateInputs(){
 
         // invalid start bases
-        if (startBase < 2 || startBase > 36){
-            throw new IllegalArgumentException("Invalid start base: " + startBase);
+        try {
+            if (startBase < MIN_BASE || startBase > MAX_BASE){
+                throw new IllegalArgumentException("Invalid start base: " + startBase);
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
 
         // invalid end bases
-        else if (endBase < 2 || endBase > 36){
+        try {
+            if (endBase < MIN_BASE || endBase > MAX_BASE){
             throw new IllegalArgumentException("Invalid end base: " + endBase);
         }
-
-        // how to implement possible tenery operator
-        else for (String s : startNumberDigits){
-            if (digitToValue.getOrDefault(s, null) == null){
-                throw new IllegalArgumentException("Illegal character: " + s + "\n Please input a number with digits between 0 Z");
-            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
         }
+    
+        try {
+            for (String s : startNumberDigits){
+                if (digitToValue.getOrDefault(s, null) == null){
+                    throw new IllegalArgumentException("Illegal character: " + s + "\n Please input a number with digits between 0 Z");
+                }
+            }
+        } catch (IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+        // how to implement possible tenery operator
+        
     }
 
     public static void main(String[] args){
