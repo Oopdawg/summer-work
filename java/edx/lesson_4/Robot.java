@@ -1,4 +1,4 @@
-package edx;
+package edx.lesson_4;
 
 public class Robot{
     
