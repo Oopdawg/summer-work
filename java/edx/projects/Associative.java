@@ -28,5 +28,4 @@ public class Associative {
     int lastTwo(){
         return x+(y*z);
     }
-
 }
