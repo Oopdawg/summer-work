@@ -10,22 +10,18 @@ public class GiveChange {
     }
 
     public void calculateChange() {
-        int pennies = (int) (changeAmount * 100);
+        int changeInPennies = (int) (changeAmount * 100);
         
-        int quarters = getQuarters(pennies);
-        int dimes = getDimes(pennies - quarters * 25);
-        int nickels = getNickels(pennies - quarters * 25 - dimes * 10);
-        int remainingPennies = getPennies(pennies - quarters * 25 - dimes * 10 - nickels * 5);
+        int quarters = getQuarters(changeInPennies);
+        int dimes = getDimes(changeInPennies - quarters * 25);
+        int nickels = getNickels(changeInPennies - quarters * 25 - dimes * 10);
+        int remainingPennies = getPennies(changeInPennies - quarters * 25 - dimes * 10 - nickels * 5);
         
-        System.out.println("Change breakdown:");
-        System.out.println("Quarters: " + quarters);
-        System.out.println("Dimes: " + dimes);
-        System.out.println("Nickels: " + nickels);
-        System.out.println("Pennies: " + remainingPennies);
+        System.out.println("Change breakdown: " + quarters + " quarters, " + dimes + " dimes, " + nickels + " nickels, " + remainingPennies +" pennies.");
     }
 
-    public static int getQuarters(int pennies) {
-        return pennies / 25;
+    public static int getQuarters(int changeInPennies) {
+        return changeInPennies / 25;
     }
     
     public static int getDimes(int pennies) {
