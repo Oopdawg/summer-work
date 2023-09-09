@@ -2,26 +2,8 @@ package Uno_App;
 
 import java.util.Scanner;
 
-public class UnoApp {
+public class UnoGame {
     
-    public static void main(String[] args){
-        UnoApp unoApp = new UnoApp();
-        unoApp.runNewGame();
-    }
-
-    public void runNewGame(){
-        playerSetup();
-        while (/*winningPlayer.score < 500*/ true){
-            runNewRound();
-        }
-    }
-
-    public void runNewRound(){
-
-    }
-
-    
-
     public void playerSetup(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("How many players are there?");
@@ -32,5 +14,9 @@ public class UnoApp {
         }
         Player winningPlayer = new Player("Default Player");
         scanner.close();
+    }
+
+    public void runNewRound(){
+
     }
 }
